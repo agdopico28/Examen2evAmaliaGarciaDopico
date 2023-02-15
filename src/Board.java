@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Board {
-    private Map<Position,Piece> map = new HashMap<>();
+    private static Map<Position,Piece> map = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         Board board= new Board();
@@ -20,8 +20,7 @@ public class Board {
         return map;
     }
 
-    public static Map<Position, Piece> readMapFormFile() throws IOException {
-        Map<Position,Piece> mapRead = new HashMap<>();
+    public static void readMapFormFile() throws IOException {
         BufferedReader in = null;
 
         try{
@@ -38,9 +37,8 @@ public class Board {
                 Position position = new Position(row,col);
                 Piece piece= new Piece(color,type);
 
-                mapRead.put(position,piece);
+                map.put(position,piece);
             }
-            return mapRead;
 
         }finally {
             if(in!= null) {
@@ -52,7 +50,6 @@ public class Board {
     @Override
     public String toString() {
         String s = "";
-        Map<Position,Piece> map = new HashMap<>();
         for(int row = 0; row <= 8; row++){
             for (int col = 0; col <= 8; col++) {
                 Position position = new Position(row,col);
@@ -61,7 +58,6 @@ public class Board {
                 }else{
                     s += map.get(position) + " ";
                 }
-
             }
             s += "\n";
         }
